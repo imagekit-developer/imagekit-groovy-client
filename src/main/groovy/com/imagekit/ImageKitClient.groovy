@@ -1,4 +1,4 @@
-package com.pabloverdugo.imagekit
+package com.imagekit
 
 import com.mashape.unirest.http.HttpResponse
 import com.mashape.unirest.http.JsonNode
@@ -13,7 +13,7 @@ class ImageKitClient {
 
     String PUBLIC_API_KEY
     String PRIVATE_API_KEY
-    String API_ID
+    String IMAGEKIT_ID
     private final static String IMAGE_KIT_IMAGE_UPLOAD_URL = 'https://upload.imagekit.io/rest/api/image/v2/'
     private final static String IMAGE_KIT_ADMIN_URL = 'https://imagekit.io/api/admin/'
 
@@ -21,7 +21,7 @@ class ImageKitClient {
         properties.load(ImageKitClient.class.getResourceAsStream('/imagekit.properties'))
         this.PUBLIC_API_KEY = properties.get('public_api_key')
         this.PRIVATE_API_KEY = properties.get('private_api_key')
-        this.API_ID = properties.get('api_id')
+        this.IMAGEKIT_ID = properties.get('imagekit_id')
     }
 
     JSONArray getLibrary(Integer skip) {
@@ -29,13 +29,13 @@ class ImageKitClient {
         if (!skip) {
             skip = 0
         }
-        String content = "imagekitId=$API_ID&limit=1000&skip=$skip".toString()
+        String content = "imagekitId=$IMAGEKIT_ID&limit=1000&skip=$skip".toString()
         try {
             def uploadResponse = Unirest.get(
                     IMAGE_KIT_ADMIN_URL + 'media/listFiles?skip={skip}&limit={limit}&imagekitId={imagekitId}&signature={signature}')
                     .routeParam('skip', skip as String)
                     .routeParam('limit', '1000')
-                    .routeParam('imagekitId', API_ID)
+                    .routeParam('imagekitId', IMAGEKIT_ID)
                     .routeParam('signature', Utils.sign(content, PRIVATE_API_KEY))
                     .asJson()
             jsonResult = uploadResponse.getBody().getArray()
@@ -72,7 +72,7 @@ class ImageKitClient {
         String content = "apiKey=" + PUBLIC_API_KEY + "&filename=" + filename + "&timestamp=" + time
         String sig = Utils.sign(content, PRIVATE_API_KEY)
         try {
-            HttpResponse<JsonNode> uploadResponse = Unirest.post(IMAGE_KIT_IMAGE_UPLOAD_URL + API_ID)
+            HttpResponse<JsonNode> uploadResponse = Unirest.post(IMAGE_KIT_IMAGE_UPLOAD_URL + IMAGEKIT_ID)
                     .header("accept", "application/json")
                     .field("file", new File(imagePath))
                     .field("filename", filename)
@@ -95,7 +95,7 @@ class ImageKitClient {
             if (quality) {
                 transformation += ",q-$quality"
             }
-            return imageUrl.replace(API_ID, API_ID + transformation.toString())
+            return imageUrl.replace(IMAGEKIT_ID, IMAGEKIT_ID + transformation.toString())
         }
     }
 
@@ -104,7 +104,7 @@ class ImageKitClient {
             ''
         } else {
             def transformation = "/tr:q-$quality"
-            return imageUrl.replace(API_ID, API_ID + transformation.toString())
+            return imageUrl.replace(IMAGEKIT_ID, IMAGEKIT_ID + transformation.toString())
         }
     }
 

@@ -1,4 +1,4 @@
-package com.pabloverdugo.imagekit
+package com.imagekit
 
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
