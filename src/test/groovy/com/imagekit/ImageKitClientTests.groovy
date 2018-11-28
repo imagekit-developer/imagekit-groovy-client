@@ -1,4 +1,4 @@
-package com.pabloverdugo.imagekit
+package com.imagekit
 
 import org.junit.Test
 

@@ -6,7 +6,7 @@ You need to register on [Imagekit](https://imagekit.io) to get this keys.
 
 You must create a imagekit.properties with your credentials.
 
-api_id=  
+imagekit_id=  
 public_api_key=  
 private_api_key=  
 
