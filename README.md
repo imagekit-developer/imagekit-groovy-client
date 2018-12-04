@@ -17,6 +17,10 @@ private_api_key=
     - Transformations
         - Quality (Can also be used as a parameter in other transformations)
         - Crop
+        - Rotate
+        - Radius
+        - Blur
+        - Border
 
 
 ## Future features

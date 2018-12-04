@@ -21,7 +21,7 @@ class Utils {
         } catch (InvalidKeyException e) {
             throw new RuntimeException("Cannot create signature.", e)
         }
-        return encoded
+        encoded
     }
 
     private static String toHexString(byte[] bytes) {
@@ -29,11 +29,11 @@ class Utils {
         for (byte b : bytes) {
             formatter.format("%02x", b)
         }
-        return formatter.toString()
+        formatter.toString()
     }
 
     static String timestamp() {
-        return Long.toString(System.currentTimeMillis() / 1000L as long)
+        Long.toString(System.currentTimeMillis() / 1000L as long)
     }
 
 }
