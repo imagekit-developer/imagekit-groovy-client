@@ -2,7 +2,7 @@ plugins {
     id 'groovy'
 }
 
-group 'com.imagekit'
+group 'io.imagekit'
 version '1.0.0-SNAPSHOT'
 
 repositories {
