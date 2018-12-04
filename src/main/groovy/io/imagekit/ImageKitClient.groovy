@@ -1,4 +1,4 @@
-package com.imagekit
+package io.imagekit
 
 import com.mashape.unirest.http.HttpResponse
 import com.mashape.unirest.http.JsonNode

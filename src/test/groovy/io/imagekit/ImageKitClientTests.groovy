@@ -1,4 +1,4 @@
-package com.imagekit
+package io.imagekit
 
 import org.junit.Test
 
